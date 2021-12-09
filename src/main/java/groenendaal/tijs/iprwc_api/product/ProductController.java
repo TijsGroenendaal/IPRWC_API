@@ -1,6 +1,7 @@
 package groenendaal.tijs.iprwc_api.product;
 
 import groenendaal.tijs.iprwc_api.product.model.ProductEntity;
+import groenendaal.tijs.iprwc_api.product.model.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ProductController {
     }
 
     @GetMapping()
-    public Page<ProductEntity> getAllProduct(
+    public Page<ProductResponse> getAllProduct(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sort

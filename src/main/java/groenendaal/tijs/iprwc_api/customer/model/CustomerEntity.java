@@ -1,5 +1,6 @@
 package groenendaal.tijs.iprwc_api.customer.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import groenendaal.tijs.iprwc_api.cartItem.model.CartItemEntity;
 import groenendaal.tijs.iprwc_api.model.BaseEntity;
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class CustomerEntity extends BaseEntity {
 
     private String password;
 
+    @JsonManagedReference("product-customer")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "customerEntity")
     private List<CartItemEntity> cartItemEntity;
 

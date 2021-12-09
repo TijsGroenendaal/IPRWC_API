@@ -3,13 +3,13 @@ package groenendaal.tijs.iprwc_api.product;
 import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
 import groenendaal.tijs.iprwc_api.exception.NameAlreadyInUseException;
 import groenendaal.tijs.iprwc_api.product.model.ProductEntity;
+import groenendaal.tijs.iprwc_api.product.model.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,13 +23,16 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Page<ProductEntity> getAllProduct(
+    public Page<ProductResponse> getAllProduct(
             int page,
             int size,
             String sort
     ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-        return productRepository.findAll(pageable);
+        List<ProductResponse> productResponseList = new ArrayList<>();
+        Page<ProductEntity> productEntities = productRepository.findAll(pageable);
+        productEntities.forEach(productEntity -> productResponseList.add(new ProductResponse(productEntity)));
+        return new PageImpl<>(productResponseList, pageable, productEntities.getTotalElements());
     }
 
     public ProductEntity getProduct(
