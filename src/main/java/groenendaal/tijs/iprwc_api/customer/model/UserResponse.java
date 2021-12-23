@@ -5,12 +5,12 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-public class CustomerResponse {
+public class UserResponse {
     UUID id;
     String email;
 
-    public CustomerResponse(CustomerEntity customerEntity) {
+    public UserResponse(UserEntity customerEntity) {
         this.id = customerEntity.getId();
-        this.email = customerEntity.getEmail();
+        this.email = customerEntity.getUsername();
     }
 }

@@ -1,0 +1,44 @@
+{
+  "properties": [
+    {
+      "name": "admin.hashed-password",
+      "type": "java.lang.String",
+      "description": "Hashed passowrd of the Admin account."
+    },
+    {
+      "name": "admin.username",
+      "type": "java.lang.String",
+      "description": "Username of the Admin account."
+    },
+    {
+      "name": "jwt.cookie-name",
+      "type": "java.lang.String",
+      "description": "Description for jwt.cookie-name."
+    },
+    {
+      "name": "jwt.lifetime",
+      "type": "java.lang.String",
+      "description": "Description for jwt.lifetime."
+    },
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for jwt.secret."
+    },
+    {
+      "name": "jwt.cookie-secure",
+      "type": "java.lang.String",
+      "description": "Description for jwt.cookie-secure."
+    },
+    {
+      "name": "jwt.cookie.restrict-site",
+      "type": "java.lang.String",
+      "description": "Description for jwt.cookie.restrict-site."
+    },
+    {
+      "name": "cors.allowed-origins",
+      "type": "java.lang.String",
+      "description": "Description for cors.allowed-origins."
+    }
+  ]
+}

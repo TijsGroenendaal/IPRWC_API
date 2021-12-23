@@ -32,7 +32,7 @@ public class CartItemService {
     public CartItemEntity createCartItem(
             CartItemEntity cartItemEntity
     ) {
-        final CartItemEntity oldCartItem = cartItemRepository.findByProductEntityAndCustomerEntity(cartItemEntity.getProductEntity(), cartItemEntity.getCustomerEntity());
+        final CartItemEntity oldCartItem = cartItemRepository.findByProductEntityAndUserEntity(cartItemEntity.getProductEntity(), cartItemEntity.getUserEntity());
 
         if (oldCartItem != null) {
             oldCartItem.setQuantity(cartItemEntity.getQuantity() + oldCartItem.getQuantity());

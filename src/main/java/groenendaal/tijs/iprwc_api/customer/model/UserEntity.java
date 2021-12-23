@@ -13,13 +13,15 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class CustomerEntity extends BaseEntity {
-    private String email;
+public class UserEntity extends BaseEntity {
+    private String username;
 
     private String password;
 
-    @JsonManagedReference("product-customer")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "customerEntity")
+    private Role role;
+
+    @JsonManagedReference("product-user")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "userEntity")
     private List<CartItemEntity> cartItemEntity;
 
 }
