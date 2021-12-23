@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -18,11 +19,11 @@ public class CartItemEntity extends BaseEntity {
     private int quantity;
 
     @JsonBackReference("product-cartItem")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private ProductEntity productEntity;
 
     @JsonBackReference("product-user")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private UserEntity userEntity;
 
 }

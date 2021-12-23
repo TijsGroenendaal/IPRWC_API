@@ -1,10 +1,8 @@
 package groenendaal.tijs.iprwc_api.product.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import groenendaal.tijs.iprwc_api.cartItem.model.CartItemEntity;
-import groenendaal.tijs.iprwc_api.image.model.ImageEntity;
 import groenendaal.tijs.iprwc_api.model.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,10 +24,7 @@ public class ProductEntity extends BaseEntity {
 
     private String description;
 
-    @JsonIgnore
-    @JsonManagedReference("product-image")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "productEntity")
-    private List<ImageEntity> imageEntityList;
+    private String imageUrl;
 
     @JsonIgnore
     @JsonManagedReference("product-cartItem")

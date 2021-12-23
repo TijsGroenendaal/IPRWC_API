@@ -21,7 +21,10 @@ public class UserPrincipalService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userService.findOneByUsername(username);
-        String[] authorities = {user.getRole().toString()};
+        String[] authorities = { user.getRole().toString() };
+        if (user.getId() != null) {
+            authorities = new String[]{user.getRole().toString(), user.getId().toString()};
+        }
         return User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())

@@ -1,6 +1,5 @@
-package groenendaal.tijs.iprwc_api.image.model;
+package groenendaal.tijs.iprwc_api.order.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import groenendaal.tijs.iprwc_api.model.BaseEntity;
 import groenendaal.tijs.iprwc_api.product.model.ProductEntity;
 import lombok.Getter;
@@ -8,17 +7,19 @@ import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 @Getter @Setter
-public class ImageEntity extends BaseEntity {
+public class OrderLineEntity extends BaseEntity {
 
-    private String description;
-
-    @JsonBackReference("product-image")
     @ManyToOne(cascade = CascadeType.DETACH)
-    private ProductEntity productEntity;
+    private OrderEntity order;
+
+    @OneToOne(cascade = CascadeType.DETACH)
+    private ProductEntity product;
+
+    private int amount;
 
 }
