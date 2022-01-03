@@ -3,6 +3,7 @@ package groenendaal.tijs.iprwc_api.customer;
 import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
 import groenendaal.tijs.iprwc_api.customer.model.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -20,11 +21,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping()
     public Iterable<UserResponse> getAllCustomer() {
         return userService.getAllCustomer();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{userId}")
     public UserResponse getCustomer(
             @PathVariable UUID userId
@@ -39,6 +42,7 @@ public class UserController {
         return userService.createCustomer(userEntity);
     }
 
+    @PreAuthorize("hasAuthority('CUSTOMER')")
     @PatchMapping("/{userId}")
     public UserResponse updateCustomer(
             @RequestBody UserEntity userEntity,
@@ -47,6 +51,7 @@ public class UserController {
         return userService.updateCustomer(userEntity, userId);
     }
 
+    @PreAuthorize("hasAuthority('CUSTOMER')")
     @DeleteMapping("/{userId}")
     public void deleteCustomer(
             @PathVariable UUID userId

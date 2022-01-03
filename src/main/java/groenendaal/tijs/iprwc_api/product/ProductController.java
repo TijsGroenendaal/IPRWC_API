@@ -4,6 +4,7 @@ import groenendaal.tijs.iprwc_api.product.model.ProductEntity;
 import groenendaal.tijs.iprwc_api.product.model.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     @GetMapping()
     public Page<ProductResponse> getAllProduct(
             @RequestParam(defaultValue = "0") int page,
@@ -29,6 +31,7 @@ public class ProductController {
         return productService.getAllProduct(page, size, sort);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     @GetMapping("/{productId}")
     public ProductEntity getProduct(
             @PathVariable UUID productId
@@ -36,6 +39,7 @@ public class ProductController {
         return productService.getProduct(productId);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping()
     public ProductEntity createProduct(
             @RequestBody ProductEntity productEntity
@@ -43,6 +47,7 @@ public class ProductController {
         return productService.createProduct(productEntity);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PatchMapping("/{productId}")
     public ProductEntity updateProduct(
             @RequestBody ProductEntity productEntity,
@@ -51,6 +56,7 @@ public class ProductController {
         return productService.updateProduct(productEntity, productId);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{productId}")
     public void deleteProduct(
             @PathVariable UUID productId
