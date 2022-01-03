@@ -2,18 +2,17 @@ package groenendaal.tijs.iprwc_api.auth;
 
 import groenendaal.tijs.iprwc_api.auth.model.UserLogin;
 import groenendaal.tijs.iprwc_api.auth.model.UserLoginResult;
+import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
 import groenendaal.tijs.iprwc_api.customer.model.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/auth")
+@RestController()
+@RequestMapping("/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -43,6 +42,17 @@ public class AuthController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(null);
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<UserResponse> signInUser(
+            @RequestBody UserEntity userEntity
+            ) {
+        UserLoginResult result = authService.signIn(userEntity);
+        HttpCookie cookie = authService.createCookie(result.getToken(), lifetime / millisecondsToSeconds);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(result.getUser());
     }
 
     @GetMapping("/user")
