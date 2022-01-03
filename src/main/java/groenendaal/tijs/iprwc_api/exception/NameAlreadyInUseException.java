@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class NameAlreadyInUseException extends RuntimeException{
 
     public NameAlreadyInUseException(String name) {
-        super("The Email '" + name + "' Is Already In Use");
+        super("The username '" + name + "' Is Already In Use");
     }
 
 }
