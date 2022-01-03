@@ -8,6 +8,8 @@ public class NameAlreadyInUseException extends RuntimeException{
 
     public NameAlreadyInUseException(String name) {
         super("The username '" + name + "' Is Already In Use");
+        System.out.println(getMessage());
+        System.out.println(getCause());
     }
 
 }

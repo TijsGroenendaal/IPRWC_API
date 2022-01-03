@@ -8,6 +8,8 @@ public class EntityNotFoundException extends RuntimeException {
 
     public <T> EntityNotFoundException(Class<T> entity) {
         super("Entity of Type '" + entity.getSimpleName() + "' Not Found");
+        System.out.println(getMessage());
+        System.out.println(getCause());
     }
 
 }

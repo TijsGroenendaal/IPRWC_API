@@ -7,5 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class WrongCredentialsException extends RuntimeException {
     public WrongCredentialsException() {
         super("Username and/ or password is incorrect");
+        System.out.println(getMessage());
+        System.out.println(getCause());
     }
 }
