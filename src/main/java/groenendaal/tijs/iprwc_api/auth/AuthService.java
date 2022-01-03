@@ -65,6 +65,10 @@ public class AuthService {
             throw new WrongCredentialsException();
         }
 
+        return createLoginResult(userDetails);
+    }
+
+    public UserLoginResult createLoginResult(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         String authorities = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -72,7 +76,7 @@ public class AuthService {
 
         claims.put(HttpSecurityConfig.AUTHORITIES_CLAIM_NAME, authorities);
 
-        String jwt = jwtHelper.createJwtForClaims(userLogin.getUsername(), claims);
+        String jwt = jwtHelper.createJwtForClaims(userDetails.getUsername(), claims);
 
         UserEntity userEntity = this.userService.findOneByUsername(userDetails.getUsername());
 
@@ -87,6 +91,18 @@ public class AuthService {
                 .secure(secureCookie)
                 .sameSite(sameSiteStrict ? "Strict" : "Lax")
                 .build();
+    }
+
+    public UserLoginResult signIn(UserEntity newUser) {
+        newUser.setPassword(argon2PasswordEncoder.encode(newUser.getPassword()));
+        userService.createCustomer(newUser);
+
+        UserDetails userDetails = userPrincipalService.createUserDetails(
+                newUser.getUsername(),
+                newUser.getPassword(),
+                new String[]{ newUser.getRole().toString(), newUser.getId().toString() });
+
+        return createLoginResult(userDetails);
     }
 
     public UserResponse getUser() {

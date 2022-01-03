@@ -25,9 +25,13 @@ public class UserPrincipalService implements UserDetailsService {
         if (user.getId() != null) {
             authorities = new String[]{user.getRole().toString(), user.getId().toString()};
         }
+        return createUserDetails(user.getUsername(), user.getPassword(), authorities);
+    }
+
+    public UserDetails createUserDetails(String username, String password, String[] authorities) {
         return User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
+                .username(username)
+                .password(password)
                 .authorities(authorities)
                 .build();
     }

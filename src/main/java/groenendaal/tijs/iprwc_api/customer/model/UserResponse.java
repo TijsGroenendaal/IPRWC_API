@@ -7,10 +7,10 @@ import java.util.UUID;
 @Value
 public class UserResponse {
     UUID id;
-    String email;
+    String username;
 
     public UserResponse(UserEntity customerEntity) {
         this.id = customerEntity.getId();
-        this.email = customerEntity.getUsername();
+        this.username = customerEntity.getUsername();
     }
 }

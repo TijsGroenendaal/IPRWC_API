@@ -71,6 +71,7 @@ public class UserService {
     public UserEntity findOneByUsername(String username) {
         if (username.equals(adminUsername)) {
             UserEntity user = new UserEntity();
+            user.setUsername(adminUsername);
             user.setPassword(new String(Base64.getDecoder().decode(adminPassword)));
             user.setRole(Role.ADMIN);
             return user;
