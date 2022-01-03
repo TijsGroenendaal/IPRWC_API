@@ -28,7 +28,7 @@ public class OrderController {
         return orderService.createOrder(orderEntity);
     }
 
-    @DeleteMapping("/{orderId}")
+//    @DeleteMapping("/{orderId}")
     public void deleteOrder(
             @PathVariable UUID orderId
     ) {
