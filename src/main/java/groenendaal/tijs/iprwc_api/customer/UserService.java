@@ -51,6 +51,8 @@ public class UserService {
         if (userRepository.existsByUsername(userEntity.getUsername())) {
             throw new NameAlreadyInUseException(userEntity.getUsername());
         } else {
+            userEntity.setRole(Role.CUSTOMER);
+
             return new UserResponse(userRepository.save(userEntity));
         }
     }
