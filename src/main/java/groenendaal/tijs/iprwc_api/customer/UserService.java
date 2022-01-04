@@ -31,7 +31,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Iterable<UserResponse> getAllCustomer() {
+    public Iterable<UserResponse> getAllUsers() {
         ArrayList<UserResponse> userResponse = new ArrayList<>();
         userRepository.findAll().forEach(userEntity -> {
             userResponse.add(new UserResponse(userEntity));
@@ -39,33 +39,33 @@ public class UserService {
         return userResponse;
     }
 
-    public UserResponse getCustomer(
-            UUID customerId
+    public UserResponse getUser(
+            UUID userId
     ) {
-        return new UserResponse(userRepository.getById(customerId));
+        return new UserResponse(userRepository.getById(userId));
     }
 
-    public UserResponse createCustomer(
-            UserEntity customerEntity
+    public UserResponse createUser(
+            UserEntity userEntity
     ) {
-        if (userRepository.existsByUsername(customerEntity.getUsername())) {
-            throw new NameAlreadyInUseException(customerEntity.getUsername());
+        if (userRepository.existsByUsername(userEntity.getUsername())) {
+            throw new NameAlreadyInUseException(userEntity.getUsername());
         } else {
-            return new UserResponse(userRepository.save(customerEntity));
+            return new UserResponse(userRepository.save(userEntity));
         }
     }
 
-    public UserResponse updateCustomer(
-            UserEntity customerEntity, UUID customerId
+    public UserResponse updateUser(
+            UserEntity userEntity, UUID userId
     ) {
-        userRepository.findById(customerId).orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
-        return new UserResponse(userRepository.save(customerEntity));
+        userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+        return new UserResponse(userRepository.save(userEntity));
     }
 
-    public void deleteCustomer(
-            UUID customerId
+    public void deleteUser(
+            UUID userId
     ) {
-        userRepository.deleteById(customerId);
+        userRepository.deleteById(userId);
     }
 
     public UserEntity findOneByUsername(String username) {

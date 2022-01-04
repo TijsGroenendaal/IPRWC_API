@@ -9,8 +9,8 @@ public class UserResponse {
     UUID id;
     String username;
 
-    public UserResponse(UserEntity customerEntity) {
-        this.id = customerEntity.getId();
-        this.username = customerEntity.getUsername();
+    public UserResponse(UserEntity userEntity) {
+        this.id = userEntity.getId();
+        this.username = userEntity.getUsername();
     }
 }

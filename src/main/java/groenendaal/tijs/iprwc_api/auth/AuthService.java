@@ -95,7 +95,7 @@ public class AuthService {
 
     public UserLoginResult signIn(UserEntity newUser) {
         newUser.setPassword(argon2PasswordEncoder.encode(newUser.getPassword()));
-        userService.createCustomer(newUser);
+        userService.createUser(newUser);
 
         UserDetails userDetails = userPrincipalService.createUserDetails(
                 newUser.getUsername(),

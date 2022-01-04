@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/customer")
+@RequestMapping(path = "/user")
 public class UserController {
 
     private final UserService userService;
@@ -23,39 +23,39 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping()
-    public Iterable<UserResponse> getAllCustomer() {
-        return userService.getAllCustomer();
+    public Iterable<UserResponse> getAllUser() {
+        return userService.getAllUsers();
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{userId}")
-    public UserResponse getCustomer(
+    public UserResponse getUser(
             @PathVariable UUID userId
     ) {
-        return userService.getCustomer(userId);
+        return userService.getUser(userId);
     }
 
 //    @PostMapping()
-    public UserResponse createCustomer(
+    public UserResponse createUser(
             @RequestBody UserEntity userEntity
     ) {
-        return userService.createCustomer(userEntity);
+        return userService.createUser(userEntity);
     }
 
     @PreAuthorize("hasAuthority('CUSTOMER')")
     @PatchMapping("/{userId}")
-    public UserResponse updateCustomer(
+    public UserResponse updateUser(
             @RequestBody UserEntity userEntity,
             @PathVariable UUID userId
     ) {
-        return userService.updateCustomer(userEntity, userId);
+        return userService.updateUser(userEntity, userId);
     }
 
     @PreAuthorize("hasAuthority('CUSTOMER')")
     @DeleteMapping("/{userId}")
-    public void deleteCustomer(
+    public void deleteUser(
             @PathVariable UUID userId
     ) {
-        userService.deleteCustomer(userId);
+        userService.deleteUser(userId);
     }
 }
