@@ -3,6 +3,7 @@ package groenendaal.tijs.iprwc_api.order;
 import groenendaal.tijs.iprwc_api.customer.UserRepository;
 import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
 import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
+import groenendaal.tijs.iprwc_api.exception.InvalidJwtException;
 import groenendaal.tijs.iprwc_api.helper.RelationHelper;
 import groenendaal.tijs.iprwc_api.order.model.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,16 @@ public class OrderService {
     }
 
     public Iterable<OrderEntity> getOrders() {
-        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId()).orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
+                .orElseThrow(() -> new InvalidJwtException());
+
         return orderRepository.getAllByUser(userEntity);
     }
 
     public OrderEntity createOrder(OrderEntity orderEntity) {
-        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId()).orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
+                .orElseThrow(() -> new InvalidJwtException());
+
         orderEntity.setUser(userEntity);
 
         return orderRepository.save(orderEntity);

@@ -4,6 +4,7 @@ import groenendaal.tijs.iprwc_api.cartItem.model.CartItemEntity;
 import groenendaal.tijs.iprwc_api.customer.UserRepository;
 import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
 import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
+import groenendaal.tijs.iprwc_api.exception.InvalidJwtException;
 import groenendaal.tijs.iprwc_api.helper.RelationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class CartItemService {
 
     public Iterable<CartItemEntity> getAllCartItem() {
         final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+                .orElseThrow(() -> new InvalidJwtException());
         return cartItemRepository.findByUserEntity(userEntity);
     }
 
@@ -35,7 +36,7 @@ public class CartItemService {
             UUID cartItemId
     ) {
         final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+                .orElseThrow(() -> new InvalidJwtException());
 
         return cartItemRepository.findByIdAndUserEntity(cartItemId, userEntity)
                 .orElseThrow(() -> new EntityNotFoundException(CartItemEntity.class));
@@ -45,7 +46,7 @@ public class CartItemService {
             CartItemEntity cartItemEntity
     ) {
         final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+                .orElseThrow(() -> new InvalidJwtException());
         cartItemEntity.setUserEntity(userEntity);
 
         final CartItemEntity oldCartItem = cartItemRepository.findByProductEntityAndUserEntity(
