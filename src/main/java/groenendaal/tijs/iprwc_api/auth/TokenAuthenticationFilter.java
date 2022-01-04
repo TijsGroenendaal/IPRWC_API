@@ -1,6 +1,6 @@
 package groenendaal.tijs.iprwc_api.auth;
 
-import groenendaal.tijs.iprwc_api.customer.UserPrincipalService;
+import groenendaal.tijs.iprwc_api.user.UserPrincipalService;
 import groenendaal.tijs.iprwc_api.helper.JwtHelper;
 import io.jsonwebtoken.ClaimJwtException;
 import org.springframework.beans.factory.annotation.Autowired;

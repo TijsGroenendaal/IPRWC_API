@@ -1,8 +1,8 @@
 package groenendaal.tijs.iprwc_api.cartItem;
 
 import groenendaal.tijs.iprwc_api.cartItem.model.CartItemEntity;
-import groenendaal.tijs.iprwc_api.customer.UserRepository;
-import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
+import groenendaal.tijs.iprwc_api.user.UserRepository;
+import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
 import groenendaal.tijs.iprwc_api.exception.InvalidJwtException;
 import groenendaal.tijs.iprwc_api.helper.RelationHelper;

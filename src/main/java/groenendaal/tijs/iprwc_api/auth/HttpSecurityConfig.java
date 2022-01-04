@@ -1,7 +1,7 @@
 package groenendaal.tijs.iprwc_api.auth;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
-import groenendaal.tijs.iprwc_api.customer.UserPrincipalService;
+import groenendaal.tijs.iprwc_api.user.UserPrincipalService;
 import groenendaal.tijs.iprwc_api.helper.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

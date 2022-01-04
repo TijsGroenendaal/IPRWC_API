@@ -1,6 +1,6 @@
 package groenendaal.tijs.iprwc_api.auth.model;
 
-import groenendaal.tijs.iprwc_api.customer.model.UserResponse;
+import groenendaal.tijs.iprwc_api.user.model.UserResponse;
 import lombok.Data;
 import lombok.NonNull;
 

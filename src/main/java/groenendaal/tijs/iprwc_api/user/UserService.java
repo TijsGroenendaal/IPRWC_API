@@ -1,8 +1,8 @@
-package groenendaal.tijs.iprwc_api.customer;
+package groenendaal.tijs.iprwc_api.user;
 
-import groenendaal.tijs.iprwc_api.customer.model.Role;
-import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
-import groenendaal.tijs.iprwc_api.customer.model.UserResponse;
+import groenendaal.tijs.iprwc_api.user.model.Role;
+import groenendaal.tijs.iprwc_api.user.model.UserEntity;
+import groenendaal.tijs.iprwc_api.user.model.UserResponse;
 import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
 import groenendaal.tijs.iprwc_api.exception.NameAlreadyInUseException;
 import org.springframework.beans.factory.annotation.Autowired;

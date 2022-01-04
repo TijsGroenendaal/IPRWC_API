@@ -1,7 +1,7 @@
 package groenendaal.tijs.iprwc_api.cartItem;
 
 import groenendaal.tijs.iprwc_api.cartItem.model.CartItemEntity;
-import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
+import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import groenendaal.tijs.iprwc_api.product.model.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

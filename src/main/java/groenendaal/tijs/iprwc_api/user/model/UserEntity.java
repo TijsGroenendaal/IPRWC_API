@@ -1,4 +1,4 @@
-package groenendaal.tijs.iprwc_api.customer.model;
+package groenendaal.tijs.iprwc_api.user.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import groenendaal.tijs.iprwc_api.cartItem.model.CartItemEntity;

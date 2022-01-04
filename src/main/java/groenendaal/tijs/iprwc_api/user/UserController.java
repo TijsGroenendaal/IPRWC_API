@@ -1,7 +1,7 @@
-package groenendaal.tijs.iprwc_api.customer;
+package groenendaal.tijs.iprwc_api.user;
 
-import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
-import groenendaal.tijs.iprwc_api.customer.model.UserResponse;
+import groenendaal.tijs.iprwc_api.user.model.UserEntity;
+import groenendaal.tijs.iprwc_api.user.model.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

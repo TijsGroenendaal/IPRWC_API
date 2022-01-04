@@ -1,4 +1,4 @@
-package groenendaal.tijs.iprwc_api.customer.model;
+package groenendaal.tijs.iprwc_api.user.model;
 
 public enum Role {
     ADMIN("admin"),

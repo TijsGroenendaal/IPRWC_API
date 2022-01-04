@@ -1,6 +1,6 @@
 package groenendaal.tijs.iprwc_api.order;
 
-import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
+import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import groenendaal.tijs.iprwc_api.order.model.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
