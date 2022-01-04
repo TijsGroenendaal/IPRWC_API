@@ -56,4 +56,10 @@ public class CartItemController {
     ) {
         cartItemService.deleteCartItem(cartItemId);
     }
+
+    @PreAuthorize("hasAuthority('CUSTOMER')")
+    @DeleteMapping()
+    public void clearCart() {
+        cartItemService.clearCart();
+    }
 }
