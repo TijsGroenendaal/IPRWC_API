@@ -1,12 +1,14 @@
 package groenendaal.tijs.iprwc_api.order;
 
 import groenendaal.tijs.iprwc_api.order.model.OrderEntity;
+import groenendaal.tijs.iprwc_api.order.model.OrderResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@RestController("order")
+@RestController()
+@RequestMapping("order")
 public class OrderController {
 
     private final OrderService orderService;
@@ -19,13 +21,13 @@ public class OrderController {
 
     @PreAuthorize("hasAuthority('CUSTOMER')")
     @GetMapping()
-    public Iterable<OrderEntity> getOrders() {
+    public Iterable<OrderResponse> getOrders() {
         return orderService.getOrders();
     }
 
     @PreAuthorize("hasAuthority('CUSTOMER')")
     @PostMapping()
-    public OrderEntity createOrder(
+    public OrderResponse createOrder(
             @RequestBody OrderEntity orderEntity
     ) {
         return orderService.createOrder(orderEntity);
