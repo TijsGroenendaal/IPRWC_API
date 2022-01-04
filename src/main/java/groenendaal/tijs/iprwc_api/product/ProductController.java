@@ -33,7 +33,7 @@ public class ProductController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     @GetMapping("/{productId}")
-    public ProductEntity getProduct(
+    public ProductResponse getProduct(
             @PathVariable UUID productId
     ) {
         return productService.getProduct(productId);
@@ -41,7 +41,7 @@ public class ProductController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping()
-    public ProductEntity createProduct(
+    public ProductResponse createProduct(
             @RequestBody ProductEntity productEntity
     ) {
         return productService.createProduct(productEntity);
@@ -49,7 +49,7 @@ public class ProductController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PatchMapping("/{productId}")
-    public ProductEntity updateProduct(
+    public ProductResponse updateProduct(
             @RequestBody ProductEntity productEntity,
             @PathVariable UUID productId
     ) {

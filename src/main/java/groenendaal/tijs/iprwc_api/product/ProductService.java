@@ -35,27 +35,29 @@ public class ProductService {
         return new PageImpl<>(productResponseList, pageable, productEntities.getTotalElements());
     }
 
-    public ProductEntity getProduct(
+    public ProductResponse getProduct(
             UUID productId
     ) {
-        return productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException(ProductEntity.class));
+        return new ProductResponse(
+                productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException(ProductEntity.class))
+        );
     }
 
-    public ProductEntity createProduct(
+    public ProductResponse createProduct(
             ProductEntity productEntity
     ) {
         if (productRepository.existsByName(productEntity.getName())) {
             throw new NameAlreadyInUseException(productEntity.getName());
         }
-        return productRepository.save(productEntity);
+        return new ProductResponse(productRepository.save(productEntity));
     }
 
-    public ProductEntity updateProduct(
+    public ProductResponse updateProduct(
             ProductEntity productEntity,
             UUID productId
     ) {
         productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException(ProductEntity.class));
-        return productRepository.save(productEntity);
+        return new ProductResponse(productRepository.save(productEntity));
     }
 
     public void deleteProduct(
