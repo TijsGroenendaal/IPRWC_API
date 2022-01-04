@@ -1,7 +1,10 @@
 package groenendaal.tijs.iprwc_api.cartItem;
 
 import groenendaal.tijs.iprwc_api.cartItem.model.CartItemEntity;
+import groenendaal.tijs.iprwc_api.customer.UserRepository;
+import groenendaal.tijs.iprwc_api.customer.model.UserEntity;
 import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
+import groenendaal.tijs.iprwc_api.helper.RelationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +14,15 @@ import java.util.UUID;
 public class CartItemService {
 
     private final CartItemRepository cartItemRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public CartItemService(
-            CartItemRepository cartItemRepository
+            CartItemRepository cartItemRepository,
+            UserRepository userRepository
     ) {
         this.cartItemRepository = cartItemRepository;
+        this.userRepository = userRepository;
     }
 
     public Iterable<CartItemEntity> getAllCartItem() {
@@ -32,6 +38,9 @@ public class CartItemService {
     public CartItemEntity createCartItem(
             CartItemEntity cartItemEntity
     ) {
+        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId()).orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+        cartItemEntity.setUserEntity(userEntity);
+
         final CartItemEntity oldCartItem = cartItemRepository.findByProductEntityAndUserEntity(
                 cartItemEntity.getProductEntity(), cartItemEntity.getUserEntity());
 
