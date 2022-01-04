@@ -8,6 +8,7 @@ import groenendaal.tijs.iprwc_api.exception.InvalidJwtException;
 import groenendaal.tijs.iprwc_api.helper.RelationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -69,6 +70,14 @@ public class CartItemService {
                 .orElseThrow(() -> new EntityNotFoundException(CartItemEntity.class));
         oldCartItem.setQuantity(cartItemEntity.getQuantity());
         return cartItemRepository.save(oldCartItem);
+    }
+
+    @Transactional
+    public void clearCart() {
+        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
+                .orElseThrow(InvalidJwtException::new);
+
+        cartItemRepository.deleteByUserEntity(userEntity);
     }
 
     public void deleteCartItem(

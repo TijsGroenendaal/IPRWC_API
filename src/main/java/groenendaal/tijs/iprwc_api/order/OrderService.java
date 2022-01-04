@@ -1,6 +1,7 @@
 package groenendaal.tijs.iprwc_api.order;
 
 import groenendaal.tijs.iprwc_api.cartItem.CartItemRepository;
+import groenendaal.tijs.iprwc_api.cartItem.CartItemService;
 import groenendaal.tijs.iprwc_api.user.UserRepository;
 import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import groenendaal.tijs.iprwc_api.exception.InvalidJwtException;
@@ -21,16 +22,19 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final CartItemRepository cartItemRepository;
+    private final CartItemService cartItemService;
 
     @Autowired
     public OrderService(
             OrderRepository orderRepository,
             UserRepository userRepository,
-            CartItemRepository cartItemRepository
+            CartItemRepository cartItemRepository,
+            CartItemService cartItemService
     ) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.cartItemRepository = cartItemRepository;
+        this.cartItemService = cartItemService;
     }
 
     public Iterable<OrderResponse> getOrders() {
@@ -53,6 +57,8 @@ public class OrderService {
         cartItemRepository.findByUserEntity(userEntity).forEach(cartItemEntity ->
                 orderLineEntitySet.add(new OrderLineEntity(cartItemEntity.getProductEntity(), cartItemEntity, orderEntity)));
         orderEntity.setOrderLines(orderLineEntitySet);
+
+        cartItemService.clearCart();
 
         return new OrderResponse(orderRepository.save(orderEntity));
     }
