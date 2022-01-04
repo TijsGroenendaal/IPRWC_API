@@ -28,7 +28,7 @@ public class CartItemService {
 
     public Iterable<CartItemEntity> getAllCartItem() {
         final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
-                .orElseThrow(() -> new InvalidJwtException());
+                .orElseThrow(InvalidJwtException::new);
         return cartItemRepository.findByUserEntity(userEntity);
     }
 
@@ -36,7 +36,7 @@ public class CartItemService {
             UUID cartItemId
     ) {
         final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
-                .orElseThrow(() -> new InvalidJwtException());
+                .orElseThrow(InvalidJwtException::new);
 
         return cartItemRepository.findByIdAndUserEntity(cartItemId, userEntity)
                 .orElseThrow(() -> new EntityNotFoundException(CartItemEntity.class));
@@ -46,7 +46,7 @@ public class CartItemService {
             CartItemEntity cartItemEntity
     ) {
         final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
-                .orElseThrow(() -> new InvalidJwtException());
+                .orElseThrow(InvalidJwtException::new);
         cartItemEntity.setUserEntity(userEntity);
 
         final CartItemEntity oldCartItem = cartItemRepository.findByProductEntityAndUserEntity(

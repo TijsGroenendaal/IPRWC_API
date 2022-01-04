@@ -21,9 +21,8 @@ public class OrderResponse {
         this.zip = orderEntity.getZip();
         this.state = orderEntity.getState();
 
-        orderEntity.getOrderLines().forEach(orderLineEntity -> {
-            orderLines.add(new OrderLineResponse(orderLineEntity));
-        });
+        orderEntity.getOrderLines().forEach(orderLineEntity ->
+                orderLines.add(new OrderLineResponse(orderLineEntity)));
 
     }
 

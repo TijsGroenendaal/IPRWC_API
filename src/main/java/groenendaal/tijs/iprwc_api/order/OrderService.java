@@ -35,25 +35,23 @@ public class OrderService {
 
     public Iterable<OrderResponse> getOrders() {
         final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
-                .orElseThrow(() -> new InvalidJwtException());
+                .orElseThrow(InvalidJwtException::new);
 
         final Set<OrderResponse> orderResponseSet = new HashSet<>();
-        orderRepository.getAllByUser(userEntity).forEach(orderEntity -> {
-            orderResponseSet.add(new OrderResponse(orderEntity));
-        });
+        orderRepository.getAllByUser(userEntity).forEach(orderEntity ->
+                orderResponseSet.add(new OrderResponse(orderEntity)));
         return orderResponseSet;
     }
 
     public OrderResponse createOrder(OrderEntity orderEntity) {
         final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
-                .orElseThrow(() -> new InvalidJwtException());
+                .orElseThrow(InvalidJwtException::new);
 
         orderEntity.setUser(userEntity);
 
         Set<OrderLineEntity> orderLineEntitySet = new HashSet<>();
-        cartItemRepository.findByUserEntity(userEntity).forEach(cartItemEntity -> {
-            orderLineEntitySet.add(new OrderLineEntity(cartItemEntity.getProductEntity(), cartItemEntity, orderEntity));
-        });
+        cartItemRepository.findByUserEntity(userEntity).forEach(cartItemEntity ->
+                orderLineEntitySet.add(new OrderLineEntity(cartItemEntity.getProductEntity(), cartItemEntity, orderEntity)));
         orderEntity.setOrderLines(orderLineEntitySet);
 
         return new OrderResponse(orderRepository.save(orderEntity));

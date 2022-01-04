@@ -33,9 +33,8 @@ public class UserService {
 
     public Iterable<UserResponse> getAllUsers() {
         ArrayList<UserResponse> userResponse = new ArrayList<>();
-        userRepository.findAll().forEach(userEntity -> {
-            userResponse.add(new UserResponse(userEntity));
-        });
+        userRepository.findAll().forEach(userEntity ->
+                userResponse.add(new UserResponse(userEntity)));
         return userResponse;
     }
 
