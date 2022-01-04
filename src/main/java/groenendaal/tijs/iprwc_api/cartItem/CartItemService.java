@@ -26,19 +26,26 @@ public class CartItemService {
     }
 
     public Iterable<CartItemEntity> getAllCartItem() {
-        return cartItemRepository.findAll();
+        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+        return cartItemRepository.findByUserEntity(userEntity);
     }
 
     public CartItemEntity getCartItem(
             UUID cartItemId
     ) {
-        return cartItemRepository.findById(cartItemId).orElseThrow(() -> new EntityNotFoundException(CartItemEntity.class));
+        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+
+        return cartItemRepository.findByIdAndUserEntity(cartItemId, userEntity)
+                .orElseThrow(() -> new EntityNotFoundException(CartItemEntity.class));
     }
 
     public CartItemEntity createCartItem(
             CartItemEntity cartItemEntity
     ) {
-        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId()).orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
+        final UserEntity userEntity = userRepository.findById(RelationHelper.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException(UserEntity.class));
         cartItemEntity.setUserEntity(userEntity);
 
         final CartItemEntity oldCartItem = cartItemRepository.findByProductEntityAndUserEntity(
@@ -57,7 +64,8 @@ public class CartItemService {
             CartItemEntity cartItemEntity,
             UUID cartItemId
     ) {
-        final CartItemEntity oldCartItem = cartItemRepository.findById(cartItemId).orElseThrow(() -> new EntityNotFoundException(CartItemEntity.class));
+        final CartItemEntity oldCartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new EntityNotFoundException(CartItemEntity.class));
         oldCartItem.setQuantity(cartItemEntity.getQuantity());
         return cartItemRepository.save(oldCartItem);
     }
