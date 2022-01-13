@@ -21,7 +21,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     @GetMapping()
     public Page<ProductResponse> getAllProduct(
             @RequestParam(defaultValue = "0") int page,
@@ -31,7 +30,6 @@ public class ProductController {
         return productService.getAllProduct(page, size, sort);
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     @GetMapping("/{productId}")
     public ProductResponse getProduct(
             @PathVariable UUID productId
