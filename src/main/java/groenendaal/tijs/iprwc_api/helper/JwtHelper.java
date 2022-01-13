@@ -47,6 +47,6 @@ public class JwtHelper {
         JwsHeader<?> headers = jwt.getHeader();
         Claims claims = jwt.getBody();
 
-        return new Jwt("bouncer-api", issuedAt.toInstant(), expiration.toInstant(), headers, claims);
+        return new Jwt("iprwc-api", issuedAt.toInstant(), expiration.toInstant(), headers, claims);
     }
 }
