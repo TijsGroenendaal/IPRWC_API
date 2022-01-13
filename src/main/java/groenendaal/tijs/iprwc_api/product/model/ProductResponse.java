@@ -12,6 +12,9 @@ public class ProductResponse {
    int quantity;
    float price;
    String description;
+   String imageUrl;
+   String brand;
+
 
    public ProductResponse(ProductEntity productEntity) {
       this.id = productEntity.getId();
@@ -19,5 +22,7 @@ public class ProductResponse {
       this.name = productEntity.getName();
       this.price = productEntity.getPrice();
       this.quantity = productEntity.getQuantity();
+      this.imageUrl = productEntity.getImageUrl();
+      this.brand = productEntity.getBrand();
    }
 }

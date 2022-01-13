@@ -8,9 +8,11 @@ import java.util.UUID;
 public class UserResponse {
     UUID id;
     String username;
+    Role role;
 
     public UserResponse(UserEntity userEntity) {
         this.id = userEntity.getId();
         this.username = userEntity.getUsername();
+        this.role = userEntity.getRole();
     }
 }
