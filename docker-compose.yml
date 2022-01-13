@@ -27,11 +27,11 @@ services:
       - ADMIN_USERNAME
       - ADMIN_HASHED_PASSWORD
       - JWT_COOKIE_NAME
-        JWT_LIFETIME
-        JWT_SECRET
-        JWT_COOKIE_SECURE
-        JWT_COOKIE_RESTRICT_SITE
-        CORS_ALLOWED_ORIGINS
+      - JWT_LIFETIME
+      - JWT_SECRET
+      - JWT_COOKIE_SECURE
+      - JWT_COOKIE_RESTRICT_SITE
+      - CORS_ALLOWED_ORIGINS
     depends_on:
       - iprwc-mysql
     volumes:
