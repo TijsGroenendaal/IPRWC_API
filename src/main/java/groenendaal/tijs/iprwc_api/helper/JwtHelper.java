@@ -1,9 +1,7 @@
 package groenendaal.tijs.iprwc_api.helper;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwsHeader;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import groenendaal.tijs.iprwc_api.exception.UnauthorizedException;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
@@ -38,15 +36,20 @@ public class JwtHelper {
     }
 
     public Jwt decode(String token) {
-        io.jsonwebtoken.Jws<Claims> jwt = Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token);
+        try {
+            io.jsonwebtoken.Jws<Claims> jwt = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token);
 
-        Date issuedAt = jwt.getBody().getIssuedAt();
-        Date expiration = jwt.getBody().getExpiration();
-        JwsHeader<?> headers = jwt.getHeader();
-        Claims claims = jwt.getBody();
+            Date issuedAt = jwt.getBody().getIssuedAt();
+            Date expiration = jwt.getBody().getExpiration();
+            JwsHeader<?> headers = jwt.getHeader();
+            Claims claims = jwt.getBody();
 
-        return new Jwt("iprwc-api", issuedAt.toInstant(), expiration.toInstant(), headers, claims);
+            return new Jwt("iprwc-api", issuedAt.toInstant(), expiration.toInstant(), headers, claims);
+        } catch (JwtException e) {
+            throw new UnauthorizedException(e.getMessage());
+        }
+
     }
 }
