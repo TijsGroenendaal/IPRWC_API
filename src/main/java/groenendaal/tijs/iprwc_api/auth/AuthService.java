@@ -2,12 +2,12 @@ package groenendaal.tijs.iprwc_api.auth;
 
 import groenendaal.tijs.iprwc_api.auth.model.UserLogin;
 import groenendaal.tijs.iprwc_api.auth.model.UserLoginResult;
+import groenendaal.tijs.iprwc_api.exception.WrongCredentialsException;
+import groenendaal.tijs.iprwc_api.helper.JwtHelper;
 import groenendaal.tijs.iprwc_api.user.UserPrincipalService;
 import groenendaal.tijs.iprwc_api.user.UserService;
 import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import groenendaal.tijs.iprwc_api.user.model.UserResponse;
-import groenendaal.tijs.iprwc_api.exception.WrongCredentialsException;
-import groenendaal.tijs.iprwc_api.helper.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpCookie;

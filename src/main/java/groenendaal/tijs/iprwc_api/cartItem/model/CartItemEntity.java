@@ -1,9 +1,9 @@
 package groenendaal.tijs.iprwc_api.cartItem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import groenendaal.tijs.iprwc_api.model.BaseEntity;
 import groenendaal.tijs.iprwc_api.product.model.ProductEntity;
+import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
 

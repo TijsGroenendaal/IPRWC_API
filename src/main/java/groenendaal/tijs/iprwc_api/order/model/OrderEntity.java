@@ -1,7 +1,7 @@
 package groenendaal.tijs.iprwc_api.order.model;
 
-import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import groenendaal.tijs.iprwc_api.model.BaseEntity;
+import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
 

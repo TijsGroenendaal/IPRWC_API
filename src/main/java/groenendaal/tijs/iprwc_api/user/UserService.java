@@ -1,10 +1,10 @@
 package groenendaal.tijs.iprwc_api.user;
 
+import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
+import groenendaal.tijs.iprwc_api.exception.NameAlreadyInUseException;
 import groenendaal.tijs.iprwc_api.user.model.Role;
 import groenendaal.tijs.iprwc_api.user.model.UserEntity;
 import groenendaal.tijs.iprwc_api.user.model.UserResponse;
-import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
-import groenendaal.tijs.iprwc_api.exception.NameAlreadyInUseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
