@@ -20,7 +20,7 @@ public class UserEntity extends BaseEntity {
 
     private Role role;
 
-    @JsonManagedReference("product-user")
+    @JsonManagedReference("cart-user")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "userEntity")
     private List<CartItemEntity> cartItemEntity;
 

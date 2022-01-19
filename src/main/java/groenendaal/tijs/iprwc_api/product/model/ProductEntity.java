@@ -28,8 +28,4 @@ public class ProductEntity extends BaseEntity {
 
     private String brand;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "productEntity")
-    private List<CartItemEntity> cartItemEntity;
-
 }

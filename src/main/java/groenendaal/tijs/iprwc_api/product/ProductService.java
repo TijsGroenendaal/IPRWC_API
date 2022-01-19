@@ -56,7 +56,13 @@ public class ProductService {
             ProductEntity productEntity,
             UUID productId
     ) {
-        productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException(ProductEntity.class));
+        final ProductEntity oldProduct = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException(ProductEntity.class));
+        oldProduct.setName(productEntity.getName());
+        oldProduct.setBrand(productEntity.getBrand());
+        oldProduct.setDescription(productEntity.getDescription());
+        oldProduct.setImageUrl(productEntity.getImageUrl());
+        oldProduct.setPrice(productEntity.getPrice());
+        oldProduct.setQuantity(productEntity.getQuantity());
         return new ProductResponse(productRepository.save(productEntity));
     }
 
