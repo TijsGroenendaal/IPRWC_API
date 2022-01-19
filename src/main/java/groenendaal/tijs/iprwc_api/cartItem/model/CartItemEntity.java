@@ -18,7 +18,6 @@ public class CartItemEntity extends BaseEntity {
 
     private int quantity;
 
-    @JsonBackReference("product-cartItem")
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private ProductEntity productEntity;
 

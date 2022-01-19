@@ -29,7 +29,6 @@ public class ProductEntity extends BaseEntity {
     private String brand;
 
     @JsonIgnore
-    @JsonManagedReference("product-cartItem")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "productEntity")
     private List<CartItemEntity> cartItemEntity;
 
