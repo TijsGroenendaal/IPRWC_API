@@ -1,5 +1,7 @@
 package groenendaal.tijs.iprwc_api.product;
 
+import groenendaal.tijs.iprwc_api.cartItem.CartItemRepository;
+import groenendaal.tijs.iprwc_api.cartItem.model.CartItemEntity;
 import groenendaal.tijs.iprwc_api.exception.EntityNotFoundException;
 import groenendaal.tijs.iprwc_api.exception.NameAlreadyInUseException;
 import groenendaal.tijs.iprwc_api.product.model.ProductEntity;
@@ -15,12 +17,15 @@ import java.util.UUID;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final CartItemRepository cartItemRepository;
 
     @Autowired
     public ProductService(
-            ProductRepository productRepository
+            ProductRepository productRepository,
+            CartItemRepository cartItemRepository
     ) {
         this.productRepository = productRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
     public Page<ProductResponse> getAllProduct(
@@ -69,6 +74,8 @@ public class ProductService {
     public void deleteProduct(
             UUID productId
     ) {
+        final ProductEntity product = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException(ProductEntity.class));
+        cartItemRepository.findAllByProductEntity(product).forEach(cartItemRepository::delete);
         productRepository.deleteById(productId);
     }
 }
